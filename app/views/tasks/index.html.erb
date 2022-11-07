@@ -1,0 +1,12 @@
+<h1>Tarefas</h1>
+
+
+<% @tasks.each do |task| %>
+<table class="table">
+  <tbody>
+    <tr>
+      <th><%= task.name %></th>
+    </tr>
+  </tbody>
+</table>
+<% end %>
