@@ -7,6 +7,11 @@
   <tbody>
     <tr>
       <th><%= task.name %></th>
+      <th>
+        <%= link_to task_path(task) do %>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        <% end %>
+      </th>
     </tr>
   </tbody>
 </table>
