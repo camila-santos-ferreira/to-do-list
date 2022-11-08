@@ -4,6 +4,9 @@
   <div>
     <%= form.label :nome %><br>
     <%= form.text_field :name %>
+    <% @task.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
   <div>
     <%= form.submit %>
