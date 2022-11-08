@@ -5,6 +5,8 @@ class TasksController < ApplicationController
     @tasks = Task.all
   end
 
+  def show; end
+
   private
 
   def find_task
