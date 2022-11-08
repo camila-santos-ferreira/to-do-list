@@ -20,4 +20,31 @@ RSpec.describe TasksController, type: :controller do
       expect(response).to render_template(:index)
     end
   end
+
+  describe 'GET show' do
+    let!(:task) { create(:task) }
+
+    it 'assigns @task' do
+      get :show, params: { id: task.id }
+      expect(assigns(:task)).to eq(task)
+    end
+
+    it 'returns a 200 http status' do
+      get :show, params: { id: task.id }
+      expect(response).to have_http_status(200)
+    end
+
+    it 'renders the show template' do
+      get :show, params: { id: task.id }
+      expect(response).to render_template(:show)
+    end
+
+    context 'when the task is not found' do
+      it 'redirects to root path' do
+        get :show, params: { id: 123456 }
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
+
 end
