@@ -21,6 +21,13 @@ class TasksController < ApplicationController
 
   def edit; end
 
+  def update
+    @task.update!(task_params)
+    redirect_to root_path
+  rescue ActiveRecord::RecordInvalid
+    render :edit
+  end
+
   private
 
   def find_task
