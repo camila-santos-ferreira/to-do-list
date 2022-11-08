@@ -1,0 +1,22 @@
+<p><%= @task.name %></p>
+
+<th>
+  <%= link_to root_path do %>
+    <i class="fa-solid fa-left-long"></i>
+  <% end %>
+</th>
+<th>
+  <%= link_to task_path(@task) do %>
+    <i class="fa-regular fa-square"></i>
+  <% end %>
+</th>
+<th>
+  <%= link_to task_path(@task) do %>
+    <i class="fa-regular fa-pen-to-square"></i>
+  <% end %>
+</th>
+<th>
+  <%= link_to task_path(@task), data: { method: :delete, confirm: 'are you sure?' } do %>
+    <i class="fa-solid fa-trash"></i>
+  <% end %>
+</th>
