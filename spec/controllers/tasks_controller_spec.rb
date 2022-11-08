@@ -132,4 +132,24 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
+  describe 'DELETE destroy' do
+    let!(:task) { create(:task) }
+
+    it 'delete the task' do
+      delete :destroy, params: { id: task.id }
+      expect(Task.all).not_to include(task)
+    end
+
+    it 'redirects to root path' do
+      delete :destroy, params: { id: task.id }
+      expect(response).to redirect_to(root_path)
+    end
+
+    context 'when the task is not found' do
+      it 'redirects to root path' do
+        delete :destroy, params: { id: '123456' }
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
 end
