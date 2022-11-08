@@ -7,6 +7,10 @@ class TasksController < ApplicationController
 
   def show; end
 
+  def new
+    @task = Task.new
+  end
+
   private
 
   def find_task
