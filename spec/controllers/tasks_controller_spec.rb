@@ -59,4 +59,32 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
+  describe 'POST create' do
+    task_params = { name: 'Test create method' }
+
+    it 'creates task' do
+      post :create, params: { task: task_params }
+      expect(Task.last).to have_attributes(
+        name: 'Test create method',
+        status: 'pending'
+      )
+    end
+
+    it 'redirects to root path' do
+      post :create, params: { task: task_params }
+      expect(response).to redirect_to(root_path)
+    end
+
+    it 'renders the index template' do
+      get :index
+      expect(response).to render_template(:index)
+    end
+
+    context 'when the task name is not valid' do
+      it 'renders the new template' do
+        post :create, params: { task: { name: nil } }
+        expect(response).to render_template(:new)
+      end
+    end
+  end
 end
