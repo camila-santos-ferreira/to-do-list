@@ -19,6 +19,8 @@ class TasksController < ApplicationController
     render :new
   end
 
+  def edit; end
+
   private
 
   def find_task
