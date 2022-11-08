@@ -107,4 +107,29 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
+  describe 'PUT update' do
+    let!(:task) { create(:task, name: 'Task') }
+    task_params = { name: 'Test update method' }
+
+    it 'updates task' do
+      put :update, params: { id: task.id, task: task_params }
+      expect(Task.last).to have_attributes(
+        name: 'Test update method',
+        status: 'pending'
+      )
+    end
+
+    it 'redirects to root path' do
+      put :update, params: { id: task.id, task: task_params }
+      expect(response).to redirect_to(root_path)
+    end
+
+    context 'when the task name is not valid' do
+      it 'renders the edit template' do
+        put :update, params: { id: task.id, task: { name: '' } }
+        expect(response).to render_template(:edit)
+      end
+    end
+  end
+
 end
