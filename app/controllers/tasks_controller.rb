@@ -26,4 +26,8 @@ class TasksController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
   end
+
+  def task_params
+    params.require(:task).permit(:name)
+  end
 end
