@@ -87,4 +87,24 @@ RSpec.describe TasksController, type: :controller do
       end
     end
   end
+
+  describe 'GET edit' do
+    let!(:task) { create(:task) }
+
+    it 'assigns @task' do
+      get :edit, params: { id: task.id }
+      expect(assigns(:task)).to eq(task)
+    end
+
+    it 'returns a 200 http status' do
+      get :edit, params: { id: task.id }
+      expect(response).to have_http_status(200)
+    end
+
+    it 'renders the edit template' do
+      get :edit, params: { id: task.id }
+      expect(response).to render_template(:edit)
+    end
+  end
+
 end
