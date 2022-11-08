@@ -11,6 +11,14 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
+  def create
+    @task = Task.new(task_params)
+    @task.save!
+    redirect_to root_path
+  rescue ActiveRecord::RecordInvalid
+    render :new
+  end
+
   private
 
   def find_task
