@@ -1,5 +1,11 @@
 <h1>Nova tarefa</h1>
 
+<p>
+  <%= link_to root_path do %>
+    <i class="fa-solid fa-left-long"></i>
+  <% end %>
+</p>
+
 <%= form_with model: @task do |form| %>
   <div>
     <%= form.label :nome %><br>
