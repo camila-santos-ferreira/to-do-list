@@ -1,18 +1,43 @@
-<h1>Tarefas</h1>
+<button type="button" class="btn btn-success">
+  <%= link_to 'Adicionar tarefa', new_task_path %>
+  <i class="fa-solid fa-circle-plus add-icon"></i>
+</button>
 
-<p><%= link_to 'Nova tarefa', new_task_path %></p>
+<button type="button" class="btn btn-danger">
+  Pendentes <span class="badge text-bg-light"><%= @mapped_tasks[:pending_tasks] %></span>
+</button>
 
-<% @tasks.each do |task| %>
-<table class="table">
-  <tbody>
-    <tr>
-      <th><%= task.name %></th>
-      <th>
-        <%= link_to task_path(task) do %>
-          <i class="fa-solid fa-magnifying-glass"></i>
+<button type="button" class="btn btn-primary">
+  Feitas <span class="badge text-bg-light"><%= @mapped_tasks[:done_tasks] %></span>
+</button>
+
+<button type="button" class="btn btn-success">
+  Total <span class="badge text-bg-light"><%= @mapped_tasks[:total_tasks] %></span>
+</button>
+
+<% @mapped_tasks[:tasks].each do |task| %>
+  <div class="card mb-3  <%= task.pending? ? 'text-bg-danger' : 'text-bg-primary' %>" style="max-width: 18rem;">
+    <div class="card-header align-right">
+      <%= link_to task_path(task), data: { method: :delete, confirm: 'Tem certeza que deseja apagar a tarefa?' } do %>
+        <i class="fa-solid fa-trash"></i>
+      <% end %>
+      <div class="display-inline <%= task.done? ? 'not-allowed-click' : '' %>">
+        <%= link_to edit_task_path(task), class: "#{ 'blocked-click' if task.done? }" do %>
+          <i class="fa-regular fa-pen-to-square"></i>
         <% end %>
-      </th>
-    </tr>
-  </tbody>
-</table>
+      </div>
+      <%= link_to task_path(task) do %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+      <% end %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">#<%= task.id %></h5>
+      <p class="card-text <%= task.done? ? 'text-line-through' : '' %>""><%= task.name%></p>
+    </div>
+    <div class="card-footer align-center">
+      <%= link_to done_task_path(id: task.id), method: :put, class: "#{ 'blocked-click' if task.done? }" do %>
+        <i class="fa-solid <%= task.pending? ? 'fa-check' : '' %>"></i>
+      <% end %>
+    </div>
+  </div>
 <% end %>
