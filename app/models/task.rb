@@ -5,4 +5,7 @@ class Task < ApplicationRecord
     status == 'pending'
   end
 
+  def done?
+    status == 'done'
+  end
 end
