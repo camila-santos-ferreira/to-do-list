@@ -1,6 +1,8 @@
 <button type="button" class="btn btn-success">
-  <%= link_to 'Adicionar tarefa', new_task_path %>
+  <%= link_to new_task_path do %>
+    <span>Adicionar tarefa</span>
   <i class="fa-solid fa-circle-plus add-icon"></i>
+  <% end %>
 </button>
 
 <button type="button" class="btn btn-danger">
