@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   before_action :find_task, only: %i[show edit update destroy]
 
   def index
-    @tasks = Task.all
+    tasks = Task.all.order(:created_at)
+    @mapped_tasks = TasksPresenter.new(tasks: tasks).map_tasks_data
   end
 
   def show; end
