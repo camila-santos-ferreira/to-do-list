@@ -4,10 +4,21 @@ RSpec.describe TasksController, type: :controller do
   describe 'GET index' do
     let!(:first_task) { create(:task) }
     let!(:second_task) { create(:task) }
+    let!(:third_task) { create(:task, :done) }
+    let(:tasks) { [first_task, second_task, third_task] }
 
-    it 'assigns @tasks' do
+    let(:expected_mapped_tasks) do
+      {
+        tasks: tasks,
+        pending_tasks: 2,
+        done_tasks: 1,
+        total_tasks: 3
+      }
+    end
+
+    it 'assigns @mapped_tasks' do
       get :index
-      expect(assigns(:tasks)).to eq([first_task, second_task])
+      expect(assigns(:mapped_tasks)).to eq(expected_mapped_tasks)
     end
 
     it 'returns a 200 http status' do
