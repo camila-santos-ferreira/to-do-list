@@ -8,4 +8,8 @@ class Task < ApplicationRecord
   def done?
     status == 'done'
   end
+
+  def done!
+    self.update!(status: 'done')
+  end
 end

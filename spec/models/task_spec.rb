@@ -42,4 +42,12 @@ RSpec.describe Task, type: :model do
       end
     end
   end
+
+  describe '#done!' do
+    let!(:task) { create(:task) }
+
+    it 'updates task status from pending to done' do
+      expect { task.done! }.to change { task.status }.from('pending').to('done')
+    end
+  end
 end
