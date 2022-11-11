@@ -116,6 +116,17 @@ RSpec.describe TasksController, type: :controller do
       get :edit, params: { id: task.id }
       expect(response).to render_template(:edit)
     end
+
+    context 'when the task status is done' do
+      before do
+        task.update_column(:status, :done)
+      end
+
+      it 'redirects to root path' do
+        get :edit, params: { id: task.id }
+        expect(response).to redirect_to(root_path)
+      end
+    end
   end
 
   describe 'PUT update' do

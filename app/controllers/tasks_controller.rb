@@ -20,7 +20,9 @@ class TasksController < ApplicationController
     render :new
   end
 
-  def edit; end
+  def edit
+    redirect_to root_path if @task.done?
+  end
 
   def update
     @task.update!(task_params)
