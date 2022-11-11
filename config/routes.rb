@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root 'tasks#index'
 
   resources :tasks
+  put '/done', to: 'tasks#done', as: :done_task
 end
