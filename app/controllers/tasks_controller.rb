@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: %i[show edit update destroy]
+  before_action :find_task, only: %i[show edit update destroy done]
 
   def index
     tasks = Task.all.order(:created_at)
