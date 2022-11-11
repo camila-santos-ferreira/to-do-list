@@ -133,7 +133,7 @@ RSpec.describe TasksController, type: :controller do
     let!(:task) { create(:task, name: 'Task') }
     task_params = { name: 'Test update method' }
 
-    it 'updates task' do
+    it 'updates the task' do
       put :update, params: { id: task.id, task: task_params }
       expect(Task.last).to have_attributes(
         name: 'Test update method',
