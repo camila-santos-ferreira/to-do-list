@@ -1,0 +1,22 @@
+<button type="button" class="btn btn-danger">
+  <%= link_to root_path do %>
+    <i class="fa-solid fa-left-long"></i>
+    <span>Voltar</span>
+  <% end %>
+</button>
+
+<h2>
+  <%= task_action %>
+</h2>
+
+<%= form_with model: task do |form| %>
+<div class="mb-3">
+  <%= form.text_area :name, class:'form-control', placeholder:'Escreva o nome da tarefa' %>
+  <% task.errors.full_messages_for(:name).each do |message| %>
+    <span><%= message %></span>
+  <% end %>
+</div>
+<div class="col-auto">
+  <%= form.submit 'Adicionar', class:'btn btn-primary mb-3' %>
+</div>
+<% end %>
