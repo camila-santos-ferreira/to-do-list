@@ -1,0 +1,5 @@
+pt-BR:
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      blank: não pode ficar em branco
