@@ -174,4 +174,27 @@ RSpec.describe TasksController, type: :controller do
       end
     end
   end
+
+  describe 'PUT done' do
+    let!(:pending_task) { create(:task) }
+
+    it 'updates the task to done' do
+      put :done, params: { id: pending_task.id }
+      pending_task.reload
+      expect(pending_task.status).to eq('done')
+    end
+
+    it 'redirects to root path' do
+      put :done, params: { id: pending_task.id }
+      expect(response).to redirect_to(root_path)
+    end
+
+    xcontext 'when the task is already done' do
+      let!(:done_task) { create(:task, :done) }
+
+      it 'raises exception' do
+        put :done, params: { id: done_task.id }
+      end
+    end
+  end
 end
