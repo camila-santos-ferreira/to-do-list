@@ -1,13 +1,1 @@
-<%= form_with model: @task do |form| %>
-  <div>
-    <%= form.label :nome %><br>
-    <%= form.text_field :name %>
-    <% @task.errors.full_messages_for(:name).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+<%= render 'form', task: @task, task_action: 'Editar tarefa' %>
