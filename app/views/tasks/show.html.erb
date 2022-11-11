@@ -1,22 +1,31 @@
-<p><%= @task.name %></p>
-
-<th>
+<button type="button" class="btn btn-danger">
   <%= link_to root_path do %>
     <i class="fa-solid fa-left-long"></i>
+    <span>Voltar</span>
   <% end %>
-</th>
-<th>
-  <%= link_to task_path(@task) do %>
-    <i class="fa-regular fa-square"></i>
-  <% end %>
-</th>
-<th>
-  <%= link_to edit_task_path(@task) do %>
-    <i class="fa-regular fa-pen-to-square"></i>
-  <% end %>
-</th>
-<th>
-  <%= link_to task_path(@task), data: { method: :delete, confirm: 'are you sure?' } do %>
-    <i class="fa-solid fa-trash"></i>
-  <% end %>
-</th>
+</button>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">#<%= @task.id %></h5>
+    <p class="card-text <%= @task.done? ? 'text-line-through' : '' %>"><%= @task.name %></p>
+  </div>
+  <div class="card-footer text-muted">
+    <button type="button" class="btn btn-danger button-lg">
+      <%= link_to task_path(@task), data: { method: :delete, confirm: 'Tem certeza que deseja apagar a tarefa?' } do %>
+        <i class="fa-solid fa-trash"></i>
+      <% end %>
+    </button>
+    <button type="button" class="btn btn-dark button-lg <%= @task.done? ? 'disabled' : '' %>">
+      <%= link_to edit_task_path(@task) do %>
+        <i class="fa-regular fa-pen-to-square"></i>
+      <% end %>
+    </button>
+    <button type="button" class="btn btn-success button-lg <%= @task.done? ? 'disabled' : '' %>">
+      <%= link_to done_task_path(id: @task.id), method: :put do %>
+        <i class="fa-solid fa-check"></i>
+      <% end %>
+    </button>
+  </div>
+</div>
+
