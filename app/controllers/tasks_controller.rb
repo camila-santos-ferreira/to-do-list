@@ -36,6 +36,15 @@ class TasksController < ApplicationController
     redirect_to root_path
   end
 
+  def done
+    return unless @task.pending?
+
+    @task.done!
+    redirect_to root_path
+  rescue StandardError
+    render :index
+  end
+
   private
 
   def find_task
