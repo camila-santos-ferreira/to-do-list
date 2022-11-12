@@ -21,6 +21,38 @@ RSpec.describe TasksController, type: :controller do
       expect(assigns(:mapped_tasks)).to eq(expected_mapped_tasks)
     end
 
+    context 'when filtered by pending status' do
+      let(:expected_mapped_tasks) do
+        {
+          tasks: [first_task, second_task],
+          pending_tasks: 2,
+          done_tasks: 1,
+          total_tasks: 3
+        }
+      end
+
+      it 'assigns @mapped_tasks with pending tasks' do
+        get :index, params: { status: 'pending' }
+        expect(assigns(:mapped_tasks)).to eq(expected_mapped_tasks)
+      end
+    end
+
+    context 'when filtered by pending status' do
+      let(:expected_mapped_tasks) do
+        {
+          tasks: [third_task],
+          pending_tasks: 2,
+          done_tasks: 1,
+          total_tasks: 3
+        }
+      end
+
+      it 'assigns @mapped_tasks with done tasks' do
+        get :index, params: { status: 'done' }
+        expect(assigns(:mapped_tasks)).to eq(expected_mapped_tasks)
+      end
+    end
+
     it 'returns a 200 http status' do
       get :index
       expect(response).to have_http_status(200)
