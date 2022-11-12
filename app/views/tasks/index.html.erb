@@ -1,3 +1,9 @@
+<% flash.each do |type, message| %>
+  <div class="alert <%= type == 'alert' ? 'alert-danger' : 'alert-success' %>" role="alert" id="taskAlert">
+   <%= message %>
+  </div>
+<% end %>
+
 <button type="button" class="btn btn-success">
   <%= link_to new_task_path do %>
     <span>Adicionar tarefa</span>

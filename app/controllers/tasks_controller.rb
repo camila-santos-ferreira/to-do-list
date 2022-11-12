@@ -15,34 +15,34 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.save!
-    redirect_to root_path
+    redirect_to root_path, notice: 'Tarefa criada'
   rescue ActiveRecord::RecordInvalid
     render :new
   end
 
   def edit
-    redirect_to root_path if @task.done?
+    redirect_to root_path, alert: 'Tarefa já está feita' if @task.done?
   end
 
   def update
     @task.update!(task_params)
-    redirect_to root_path
+    redirect_to root_path, notice: 'Tarefa atualizada'
   rescue ActiveRecord::RecordInvalid
     render :edit
   end
 
   def destroy
     @task.destroy
-    redirect_to root_path
+    redirect_to root_path, notice: 'Tarefa excluída'
   end
 
   def done
     return unless @task.pending?
 
     @task.done!
-    redirect_to root_path
+    redirect_to root_path, notice: 'Tarefa feita'
   rescue StandardError
-    render :index
+    render :index, alert: 'Ocorreu um erro inesperado'
   end
 
   private
@@ -50,7 +50,7 @@ class TasksController < ApplicationController
   def find_task
     @task = Task.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    redirect_to root_path
+    redirect_to root_path, alert: 'Tarefa não encontrada'
   end
 
   def task_params

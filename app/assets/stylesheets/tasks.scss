@@ -40,3 +40,19 @@ a {
 .button-lg {
   width: 120px;
 }
+
+#taskAlert {
+  animation: cssAnimation 0s 2.5s forwards;
+  visibility: visible;
+}
+
+@keyframes cssAnimation {
+  to { 
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+}
