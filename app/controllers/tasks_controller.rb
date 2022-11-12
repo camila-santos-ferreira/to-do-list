@@ -26,7 +26,7 @@ class TasksController < ApplicationController
 
   def update
     @task.update!(task_params)
-    redirect_to root_path, notice: 'Tarefa atualizada'
+    redirect_to task_path(@task.id), notice: 'Tarefa atualizada'
   rescue ActiveRecord::RecordInvalid
     render :edit
   end

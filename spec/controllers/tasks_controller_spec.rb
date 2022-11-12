@@ -173,9 +173,9 @@ RSpec.describe TasksController, type: :controller do
       )
     end
 
-    it 'redirects to root path' do
+    it 'redirects to show path' do
       put :update, params: { id: task.id, task: task_params }
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(task_path(task.id))
     end
 
     context 'when the task name is not valid' do
