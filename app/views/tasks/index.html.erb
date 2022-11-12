@@ -13,17 +13,23 @@
   <% end %>
 </button>
 
-<button type="button" class="btn btn-danger">
-  Pendentes <span class="badge text-bg-light"><%= @mapped_tasks[:pending_tasks] %></span>
-</button>
+<%= link_to tasks_path(status: 'pending'), method: :get do %>
+  <button type="button" class="btn btn-danger">
+    Pendentes <span class="badge text-bg-light"><%= @mapped_tasks[:pending_tasks] %></span>
+  </button>
+<% end %>
 
-<button type="button" class="btn btn-primary">
-  Feitas <span class="badge text-bg-light"><%= @mapped_tasks[:done_tasks] %></span>
-</button>
+<%= link_to tasks_path(status: 'done'), method: :get do %>
+  <button type="button" class="btn btn-primary">
+    Feitas <span class="badge text-bg-light"><%= @mapped_tasks[:done_tasks] %></span>
+  </button>
+<% end %>
 
-<button type="button" class="btn btn-success">
-  Total <span class="badge text-bg-light"><%= @mapped_tasks[:total_tasks] %></span>
-</button>
+<%= link_to tasks_path(status: nil), method: :get do %>
+  <button type="button" class="btn btn-success">
+    Total <span class="badge text-bg-light"><%= @mapped_tasks[:total_tasks] %></span>
+  </button>
+<% end %>
 
 <% @mapped_tasks[:tasks].each do |task| %>
   <div class="card mb-3  <%= task.pending? ? 'text-bg-danger' : 'text-bg-primary' %>" style="max-width: 18rem;">

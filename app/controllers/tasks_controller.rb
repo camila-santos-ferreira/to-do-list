@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   def index
     tasks = Task.all.order(:created_at)
-    @mapped_tasks = TasksPresenter.new(tasks: tasks).map_tasks_data
+    @mapped_tasks = TasksPresenter.new(tasks: tasks, status: status).map_tasks_data
   end
 
   def show; end
@@ -55,5 +55,13 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:name)
+  end
+
+  def permitted_params
+    params.permit(:status)
+  end
+
+  def status
+    permitted_params[:status]
   end
 end
