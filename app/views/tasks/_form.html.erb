@@ -6,7 +6,7 @@
 </button>
 
 <h2>
-  <%= task_action %>
+  <%= task_action %> <%= task.id.present? ? "##{task.id}" : '' %>
 </h2>
 
 <%= form_with model: task do |form| %>
