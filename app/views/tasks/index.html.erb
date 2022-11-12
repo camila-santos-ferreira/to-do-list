@@ -34,7 +34,7 @@
     </div>
     <div class="card-body">
       <h5 class="card-title">#<%= task.id %></h5>
-      <p class="card-text <%= task.done? ? 'text-line-through' : '' %>""><%= task.name%></p>
+      <p class="card-text <%= task.done? ? 'text-line-through' : '' %>"><%= task.name%></p>
     </div>
     <div class="card-footer align-center">
       <%= link_to done_task_path(id: task.id), method: :put, class: "#{ 'blocked-click' if task.done? }" do %>
