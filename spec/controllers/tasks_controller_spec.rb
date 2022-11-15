@@ -83,9 +83,10 @@ RSpec.describe TasksController, type: :controller do
     end
 
     context 'when the task is not found' do
-      it 'redirects to root path' do
+      it 'redirects to root path and flash alert message' do
         get :show, params: { id: 123456 }
         expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq('Tarefa não encontrada')
       end
     end
   end
@@ -113,9 +114,10 @@ RSpec.describe TasksController, type: :controller do
       )
     end
 
-    it 'redirects to root path' do
+    it 'redirects to root path and flash notice message' do
       post :create, params: { task: task_params }
       expect(response).to redirect_to(root_path)
+      expect(flash[:notice]).to eq('Tarefa criada')
     end
 
     it 'renders the index template' do
@@ -154,9 +156,10 @@ RSpec.describe TasksController, type: :controller do
         task.update_column(:status, :done)
       end
 
-      it 'redirects to root path' do
+      it 'redirects to root path and flash alert message' do
         get :edit, params: { id: task.id }
         expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq('Tarefa já está feita')
       end
     end
   end
@@ -173,9 +176,11 @@ RSpec.describe TasksController, type: :controller do
       )
     end
 
-    it 'redirects to show path' do
+    it 'redirects to show path and flash notice message' do
       put :update, params: { id: task.id, task: task_params }
       expect(response).to redirect_to(task_path(task.id))
+      expect(flash[:notice]).to eq('Tarefa atualizada')
+    end
     end
 
     context 'when the task name is not valid' do
@@ -194,15 +199,17 @@ RSpec.describe TasksController, type: :controller do
       expect(Task.all).not_to include(task)
     end
 
-    it 'redirects to root path' do
+    it 'redirects to root path and flash notice message' do
       delete :destroy, params: { id: task.id }
       expect(response).to redirect_to(root_path)
+      expect(flash[:notice]).to eq('Tarefa excluída')
     end
 
     context 'when the task is not found' do
-      it 'redirects to root path' do
-        delete :destroy, params: { id: '123456' }
+      it 'redirects to root path and flash alert message' do
+        delete :destroy, params: { id: 123456 }
         expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq('Tarefa não encontrada')
       end
     end
   end
@@ -216,16 +223,20 @@ RSpec.describe TasksController, type: :controller do
       expect(pending_task.status).to eq('done')
     end
 
-    it 'redirects to root path' do
+    it 'redirects to root path and flash notice message' do
       put :done, params: { id: pending_task.id }
       expect(response).to redirect_to(root_path)
+      expect(flash[:notice]).to eq('Tarefa feita')
+    end
     end
 
-    xcontext 'when the task is already done' do
+    context 'when the task is already done' do
       let!(:done_task) { create(:task, :done) }
 
-      it 'raises exception' do
+      it 'redirects to root path and flash alert message' do
         put :done, params: { id: done_task.id }
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq('Tarefa já está feita')
       end
     end
   end
