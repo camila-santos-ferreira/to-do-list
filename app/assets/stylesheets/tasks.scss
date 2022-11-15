@@ -2,15 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-i {
-  color: #fff;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
 a {
   text-decoration: none !important;
-  color: #fff !important;;
+  color: #fff !important;
 }
 
 .align-center {
@@ -21,33 +15,36 @@ a {
   text-align: right;
 }
 
-.display-inline {
-  display: inline;
-}
-
-.not-allowed-click {
-  cursor: not-allowed;
-}
-
 .blocked-click {
   pointer-events: none;
 }
 
-.text-line-through {
-  text-decoration: line-through;
+.btn-index {
+  width: 180px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
-.button-lg {
+.btn-show {
   width: 120px;
+  margin-right: 8px;
+  margin-bottom: 4px;
 }
 
-#taskAlert {
-  animation: cssAnimation 0s 2.5s forwards;
-  visibility: visible;
+.card-header {
+  background-color: transparent !important;
+}
+
+.card-footer {
+  background-color: transparent !important;
+}
+
+.card-margin {
+  margin: 0px 16px 16px 0px;
 }
 
 @keyframes cssAnimation {
-  to { 
+  to {
     visibility: hidden;
     width: 0;
     height: 0;
@@ -55,4 +52,41 @@ a {
     margin: 0;
     border: 0;
   }
+}
+
+.display-inline {
+  display: inline;
+}
+
+h6 {
+  font-weight: 400 !important;
+}
+
+i {
+  color: #fff;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.not-allowed-click {
+  cursor: not-allowed;
+}
+
+.option-icon-margin {
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+#taskAlert {
+  animation: cssAnimation 0s 2.5s forwards;
+  visibility: visible;
+  margin-top: 16px;
+}
+
+textarea {
+  height: 88px;
+}
+
+.text-line-through {
+  text-decoration: line-through;
 }
