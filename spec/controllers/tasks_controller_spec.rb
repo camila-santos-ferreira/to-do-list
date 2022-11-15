@@ -126,8 +126,11 @@ RSpec.describe TasksController, type: :controller do
     end
 
     context 'when the task name is not valid' do
-      it 'renders the new template' do
+      it 'renders the new and show message error' do
         post :create, params: { task: { name: nil } }
+        task_errors = assigns(:task).errors[:name]
+
+        expect(task_errors).to include('não pode ficar em branco')
         expect(response).to render_template(:new)
       end
     end
@@ -199,8 +202,11 @@ RSpec.describe TasksController, type: :controller do
     end
 
     context 'when the task name is not valid' do
-      it 'renders the edit template' do
+      it 'renders the edit template and show message error' do
         put :update, params: { id: task.id, task: { name: '' } }
+        task_errors = assigns(:task).errors[:name]
+
+        expect(task_errors).to include('não pode ficar em branco')
         expect(response).to render_template(:edit)
       end
     end
