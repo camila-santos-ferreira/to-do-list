@@ -151,6 +151,14 @@ RSpec.describe TasksController, type: :controller do
       expect(response).to render_template(:edit)
     end
 
+    context 'when the task is not found' do
+      it 'redirects to root path and flash alert message' do
+        get :edit, params: { id: 123456 }
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq('Tarefa não encontrada')
+      end
+    end
+
     context 'when the task status is done' do
       before do
         task.update_column(:status, :done)
@@ -181,6 +189,13 @@ RSpec.describe TasksController, type: :controller do
       expect(response).to redirect_to(task_path(task.id))
       expect(flash[:notice]).to eq('Tarefa atualizada')
     end
+
+    context 'when the task is not found' do
+      it 'redirects to root path and flash alert message' do
+        put :update, params: { id: 123456, task: task_params }
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq('Tarefa não encontrada')
+      end
     end
 
     context 'when the task name is not valid' do
@@ -228,6 +243,13 @@ RSpec.describe TasksController, type: :controller do
       expect(response).to redirect_to(root_path)
       expect(flash[:notice]).to eq('Tarefa feita')
     end
+
+    context 'when the task is not found' do
+      it 'redirects to root path and flash alert message' do
+        put :done, params: { id: 123456 }
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq('Tarefa não encontrada')
+      end
     end
 
     context 'when the task is already done' do
