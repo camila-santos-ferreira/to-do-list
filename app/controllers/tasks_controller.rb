@@ -37,7 +37,7 @@ class TasksController < ApplicationController
   end
 
   def done
-    return unless @task.pending?
+    return redirect_to root_path, alert: 'Tarefa já está feita' if @task.done?
 
     @task.done!
     redirect_to root_path, notice: 'Tarefa feita'
